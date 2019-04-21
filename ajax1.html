@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <span><button type="button" onclick="getall()">Add</button><button type="button" onclick="deletall()">DELETE</button></span>
+
+
+    <div class="row">
+        <div  id="id01">
+
+        </div>
+    </div>
+
+    <script>
+        function getall() {
+            var xmlhttp = new XMLHttpRequest();
+            var address = "https://jsonplaceholder.typicode.com/posts";
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myArr = JSON.parse(this.responseText);
+                    myFunction(myArr);
+                }
+            };
+            xmlhttp.open("GET", address, true);
+            xmlhttp.send();
+
+            function myFunction(arr) {
+                var i;
+                for (i = 0; i < arr.length; i++)
+                {
+                    
+                    document.getElementById("id01").innerHTML += "User Id: "+ arr[i].userId+"<br>";           
+                    document.getElementById("id01").innerHTML += "Id:      "+ arr[i].id+"<br>";           
+                    document.getElementById("id01").innerHTML += "Title:   "+ arr[i].title+"<br>";           
+                    document.getElementById("id01").innerHTML += "body:    "+ arr[i].body+"<br><br><br>";                    
+                }
+            }
+        }
+        function deletall()
+        {
+            document.getElementById("id01").innerHTML = " ";
+        }
+    </script>
+
+</body>
+
+</html>
